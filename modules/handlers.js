@@ -7,11 +7,16 @@ exports.upload = function(request, response) {
     var form = new formidable.IncomingForm();
     form.parse(request, function(error, fields, files) {
         fs.rename(files.upload.path, "test.png", function(err, handle) {
-
+            if (err==true) {
+                response.write("Brak pliku");
+                response.end();
+            } else {
             response.writeHead(200, {"Content-Type": "text/html"});
             response.write("received image:<br/>");
             response.write("<img src='/show' />");
             response.end();
+            
+            }
         });
         
     });
@@ -28,6 +33,7 @@ exports.welcome = function(request, response) {
 
 exports.show = function(request, response) {
     fs.readFile("test.png", "binary", function(error, file) {
+        //obsluga error
         response.writeHead(200, {"Content-Type": "image/png"});
         response.write(file, "binary");
         response.end();

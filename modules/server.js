@@ -10,7 +10,7 @@ function start() {
         switch (request.url) {
             case "/" :
             case "/start": 
-                handlers.welcome(request,response);
+                handlers.welcome(request, response);
                 break;
             case "/upload":
                 handlers.upload(request, response);
@@ -23,7 +23,7 @@ function start() {
         }
     }
     http.createServer(onRequest).listen(9000);
-    console.log('Uruchomiono server'.inverse);
+    console.log('Uruchomiono server \n localhost:9000'.inverse);
 }
 
 
